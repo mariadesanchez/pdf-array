@@ -1,20 +1,26 @@
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' }); // Directorio donde se guardarán los archivos
-const cors = require('cors');
 
 // Antes de tus rutas, usa el middleware CORS
 // app.use(cors());
-const express = require('express');
-const cors = require('cors'); // Importa el paquete cors
-const app = express();
 
-// Configura las opciones de CORS
+const express = require("express")
+const app = express()
+const cors = require("cors")
+    // Configura las opciones de CORS
 const corsOptions = {
     origin: 'https://pdf-converter-kappa.vercel.app', // Reemplaza con tu dominio de frontend
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(express.json())
+app.use(cors())
+
+app.get("/", (req, res) => {
+    res.send("Todo okey")
+})
+
 app.post('/pdfviewer', upload.single('pdfFile'), async(req, res) => {
             try {
                 const pdfPath = req.file.path; // Ruta al archivo PDF cargado
@@ -126,3 +132,6 @@ app.post('/pdfviewer', upload.single('pdfFile'), async(req, res) => {
     res.status(500).json({ error: 'Error al procesar el PDF' });
   }
 });
+app.listen(3000, () => {
+  console.log("servidor corriendo")
+})
