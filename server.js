@@ -9,7 +9,7 @@ const app = express()
 const cors = require("cors")
     // Configura las opciones de CORS
 const corsOptions = {
-    origin: 'https://pdf-converter-kappa.vercel.app/App', // Reemplaza con tu dominio de frontend
+    origin: 'https://pdf-converter-kappa.vercel.app', // Reemplaza con tu dominio de frontend
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
 
